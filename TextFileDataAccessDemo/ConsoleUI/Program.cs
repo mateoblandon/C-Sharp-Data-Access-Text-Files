@@ -32,8 +32,17 @@ namespace ConsoleUI
         }
         foreach (var person in people)
         {
-          Console.WriteLine(string.Format("{0} {1} {2}", person.FirstName, person.LastName, person.Url));
+          Console.WriteLine(string.Format("{0} {1}: {2}", person.FirstName, person.LastName, person.Url));
         }
+        people.Add(new Person { FirstName = "Santiago", LastName = "Blandón", Url = "www.santiagoblandon.com" });
+
+        List<string> output = new List<string>();
+        foreach (var person in people)
+        {
+          output.Add(person.FirstName + "," + person.LastName + "," + person.Url);
+        }
+        File.WriteAllLines(filePath, output);
+        Console.WriteLine("Nuevo nombre agredado al archivo");
         Console.ReadLine();
       }
       catch (Exception ex) 
