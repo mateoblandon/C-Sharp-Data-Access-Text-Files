@@ -16,18 +16,29 @@ namespace ConsoleUI
     {
       try
       {
-        string filePath = @"C:\Documents\Cursos\TimCorey\C-Sharp-Data-Access-Text-Files\Demos\Test.txt";
+        string filePath = @"C:\Users\blandonm\Documents\Cursos\TimCorey\C-Sharp-Data-Access-Text-Files\Demos\Test.txt";
         List<string> lines = File.ReadAllLines(filePath).ToList();
-        foreach (string line in lines)
+        List<Person> people = new List<Person>();
+        
+        foreach (var line in lines)
         {
+          Person newPerson = new Person();
+          string[] entries = line.Split(',');
+          newPerson.FirstName = entries[0];
+          newPerson.LastName = entries[1];
+          newPerson.Url = entries[2];
+          people.Add(newPerson);
           Console.WriteLine(line);
+        }
+        foreach (var person in people)
+        {
+          Console.WriteLine(string.Format("{0} {1} {2}", person.FirstName, person.LastName, person.Url));
         }
         Console.ReadLine();
       }
       catch (Exception ex) 
       { 
-        log.Debug("Ha ocurrido una excepción:", ex
-          );
+        log.Debug("Ha ocurrido una excepción:", ex);
         Console.ReadLine();
       }
      }
